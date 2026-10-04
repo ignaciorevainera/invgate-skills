@@ -1,0 +1,27 @@
+{
+  "name": "invgate-skills",
+  "version": "0.1.0",
+  "description": "AI agent skills for InvGate Service Management",
+  "bin": {
+    "invgate-skills": "./bin/invgate-skills.js"
+  },
+  "main": "./bin/invgate-skills.js",
+  "files": [
+    "bin/",
+    "skills/",
+    "plugin.json"
+  ],
+  "keywords": [
+    "invgate",
+    "skills",
+    "ai-agent",
+    "antigravity",
+    "claude-code"
+  ],
+  "author": "Ignacio Revainera",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ignaciorevainera/invgate-skills.git"
+  }
+}
