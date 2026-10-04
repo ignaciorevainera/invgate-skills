@@ -1,0 +1,10 @@
+{
+  "name": "invgate-skills",
+  "description": "A collection of AI agent skills for InvGate Service Management: templates, workflows, and service catalog design.",
+  "version": "0.1.0",
+  "skills": [
+    "skills/invgate-templates",
+    "skills/invgate-workflows",
+    "skills/invgate-catalog"
+  ]
+}
