@@ -54,3 +54,7 @@ When the user requests a new template or form fields for InvGate, strictly follo
 2. Ask for the list of fields they want to include if they haven't provided them.
 3. Generate the HTML code applying the exact tags and styles described above.
 4. Output the raw HTML code block so the user can easily copy and paste it into InvGate.
+
+## Field Discovery
+
+When an InvGate MCP server is available, use `invgate-mcp` (`get_category_creation_form`) to see which custom fields and option values a category already defines before designing a template. Never reuse option values or IDs from a different instance.
