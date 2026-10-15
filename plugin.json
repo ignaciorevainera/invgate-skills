@@ -5,6 +5,9 @@
   "skills": [
     "skills/invgate-templates",
     "skills/invgate-workflows",
-    "skills/invgate-catalog"
+    "skills/invgate-catalog",
+    "skills/invgate-api",
+    "skills/invgate-mcp",
+    "skills/invgate-docs"
   ]
 }
