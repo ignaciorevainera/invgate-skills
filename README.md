@@ -22,6 +22,7 @@ InvGate solutions are not one-size-fits-all:
 | [`invgate-api`](skills/invgate-api/SKILL.md) | Build, execute, and debug HTTP REST API requests against InvGate endpoints (Incidents, Workflows, Users, KB). | Integrations / REST |
 | [`invgate-mcp`](skills/invgate-mcp/SKILL.md) | Query live instance entities via Model Context Protocol (MCP) with strict environment precedence (QA vs. Prod). | Live Inspection |
 | [`invgate-docs`](skills/invgate-docs/SKILL.md) | Write concise, Notion-compatible technical runbooks, SOPs/KB articles, ADRs, and process improvement proposals. | Documentation / KB |
+| [`invgate-views`](skills/invgate-views/SKILL.md) | Retrieve filtered request lists using saved custom views (`view_id`), polling, and anti-saturation patterns. | Views / Reporting |
 
 ---
 
@@ -80,7 +81,9 @@ invgate-skills/
     │   └── references/       # Domain markdown reference docs
     ├── invgate-mcp/          # MCP tools reference & precedence rules
     │   └── references/       # Tool input schemas & entity shapes
-    └── invgate-docs/         # Notion-compatible documentation archetypes
+    ├── invgate-docs/         # Notion-compatible documentation archetypes
+    └── invgate-views/        # Saved views, reporting & anti-saturation
+        └── references/       # Endpoints, paging & export specs
 ```
 
 ---

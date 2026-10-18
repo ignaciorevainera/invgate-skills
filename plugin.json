@@ -8,6 +8,7 @@
     "skills/invgate-catalog",
     "skills/invgate-api",
     "skills/invgate-mcp",
-    "skills/invgate-docs"
+    "skills/invgate-docs",
+    "skills/invgate-views"
   ]
 }
