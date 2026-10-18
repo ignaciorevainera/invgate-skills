@@ -106,6 +106,7 @@ When looking up specific endpoints, inspect the corresponding reference file:
 | **Catalog & Custom Fields** | `references/catalog-custom-fields.md` | `/categories`, `/cf.fields.all`, `/cf.field.options.list`, `/cf.field.options.tree` |
 | **Workflows** | `references/workflows.md` | `/wf.request`, `/wf.deploy`, `/wf.initialfields.by.category` |
 | **Knowledge Base & System** | `references/knowledge-system.md` | `/kb.articles`, `/kb.categories`, `/breakingnews`, `/timetracking`, `/data.export`, `/sd.version` |
+| **Views & Reporting** | `skills/invgate-views` | `/incidents.details.by.view`, `/incidents.by.view`, `/incidents.last.hour`, anti-saturation patterns |
 
 ---
 

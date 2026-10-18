@@ -20,7 +20,7 @@ Verified against a QA instance. Structure applies to any instance; IDs and names
 | `search_kb` / `get_kb_articles` | text / ids | KB articles |
 | `ask_virtual_agent` | `question`, `context` | synthesized natural-language answer |
 | `list_my_requests`, `list_my_work`, `list_pending_tasks`, `list_my_participations`, `list_pending_approvals`, `list_requests_due_soon`, `list_notifications` | `limit`, `page` | personal queues of the authenticated user |
-| `list_requests_views`, `list_view_requests` | view id | saved views |
+| `list_requests_views`, `list_view_requests` | `view_id`, `predefined` (boolean: false for user views, true for system), `limit`, `page` | saved views (see `invgate-views` for full anti-saturation guide) |
 
 `list_users` scopes: `my_coworkers` (default), `agents`, `coordinators`, `admins`, `endusers`, `all`, `all_except_me`.
 
