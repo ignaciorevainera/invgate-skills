@@ -26,6 +26,31 @@ InvGate solutions are not one-size-fits-all:
 
 ---
 
+## Install with `npx skills`
+
+Install from GitHub with the [skills.sh](https://skills.sh) CLI. It detects your agent (Claude Code, Cursor, Codex, OpenCode, Windsurf, Copilot, and more) and places the skills in the right folder.
+
+```bash
+# Pick skills interactively
+npx skills add ignaciorevainera/invgate-skills
+
+# List available skills without installing
+npx skills add ignaciorevainera/invgate-skills --list
+
+# Install every skill for every detected agent
+npx skills add ignaciorevainera/invgate-skills --all
+
+# Install one skill for one agent (e.g. OpenCode)
+npx skills add ignaciorevainera/invgate-skills --skill invgate-api --agent opencode
+
+# Install globally (user-level) instead of per project
+npx skills add ignaciorevainera/invgate-skills --all --global
+```
+
+Update or remove later with `npx skills update` and `npx skills remove`.
+
+---
+
 ## Built-in CLI Utilities
 
 The package includes executable CLI tools available via `npx`:
