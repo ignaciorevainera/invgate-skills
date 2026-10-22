@@ -1,6 +1,6 @@
 ---
 name: invgate-workflows
-description: Use when designing, analyzing, editing, or converting InvGate Service Management workflows (.sdw files) or defining approvals, routing, and automated steps.
+description: Use when designing, analyzing, editing, converting, or visually diagramming (Mermaid) InvGate Service Management workflows (.sdw files) or defining approvals, routing, and automated steps.
 ---
 
 # InvGate Workflows & SDW Engineering
@@ -67,6 +67,30 @@ For any connection between Node A and Node B:
 | `3` | `310` | **Espera** | Timer or event pause (`waitingFor`). |
 
 For the complete JSON schema and parameter mapping, consult [`references/sdw-schema.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/sdw-schema.md).
+
+---
+
+## Mermaid Workflow Diagramming
+
+When asked to visually represent, design, or document an InvGate workflow using Mermaid, always generate a `flowchart TD` block following the official color and shape standard:
+
+| Node Type | Color | Mermaid Syntax | Class |
+|---|---|---|---|
+| **Inicio (Start)** | Verde (`#2ecc71`) | `([ "Inicio: ..." ])` | `:::startNode` |
+| **Solicitudes / Formulario / Acciones** | Azul (`#3498db`) | `[ "Paso: ..." ]` | `:::requestNode` |
+| **Condicional / Bifurcación** | Amarillo (`#f1c40f`) | `{"¿Condición?"}` (Rombo) | `:::conditionNode` |
+| **Aprobaciones** | Cian (`#00bcd4`) | `[ "Aprobación: ..." ]` | `:::approvalNode` |
+| **Tareas** | Naranja (`#f39c12`) | `[ "Tarea: ..." ]` | `:::taskNode` |
+| **Subprocesos** | Naranja intenso (`#d35400`) | `[[ "Subproceso: ..." ]]` | `:::subprocessNode` |
+| **Fórmulas / Cálculos** | Verde lima (`#8bc34a`) | `[ "Fórmula: ..." ]` | `:::formulaNode` |
+| **Web Services / API** | Verde oscuro (`#1e824c`) | `[ "Web Service: ..." ]` | `:::webserviceNode` |
+| **Espera de tiempo** | Violeta (`#9b59b6`) | `[ "Espera: ..." ]` | `:::waitNode` |
+| **Cancelación / Rechazo** | Rojo (`#e74c3c`) | `([ "Cancelado: ..." ])` | `:::cancelNode` |
+| **Fin de solicitud** | Gris (`#95a5a6`) | `([ "Fin: ..." ])` | `:::endNode` |
+
+Always include the corresponding `classDef` rules in the diagram. Wrap all step labels in double quotes (`"..."`) and explicitly label branch arrows (e.g. `-->|"Sí"|`, `-->|"Aprobado"|`).
+
+For full class definitions and a complete multi-step example, consult [`references/mermaid-diagrams.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/mermaid-diagrams.md).
 
 ## Practices Observed in Real Workflows
 
