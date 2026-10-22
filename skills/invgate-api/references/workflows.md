@@ -86,3 +86,50 @@ Returns the general information of a workflow request, the steps it went through
 
 ---
 
+
+### `GET /workflow.field.list.values`
+
+Retrieves current values from a workflow instance field of type list.
+
+**Parameters:**
+
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `request_id` | `INTEGER` | Yes | ID of the workflow instance. |
+| `field_id` | `STRING` | Yes | ID of the variable visible in the workflows variable panel. |
+
+**Response Fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `field_id` | `STRING` | The ID of the instance field. |
+| `values` | `ARRAY` | Current values of the field. |
+| `status` | `STRING` | Returns "OK" if the operation was successful; or "ERROR" if something went wrong. |
+| `request_id` | `INTEGER` | ID of the workflow instance. |
+
+---
+
+### `POST /workflow.field.list.values`
+
+Adds or sets values in a workflow instance field of type list. Use operation "add" to append values (default) or "set" to replace all values.
+
+**Parameters:**
+
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `request_id` | `INTEGER` | Yes | ID of the workflow instance to update. |
+| `field_id` | `STRING` | Yes | ID of the variable visible in the workflows variable panel. |
+| `operation` | `STRING` | No | Operation: "add" (append values, default) or "set" (replace all values). |
+| `values` | `ARRAY` | No | Array of values to add or set. Use this OR value parameter. |
+| `value` | `STRING` | No | Single value to add or set. Use this OR values parameter. |
+| `author_id` | `INTEGER` | No | User ID for logging purposes. Defaults to system user if not provided. |
+
+**Response Fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `field_id` | `STRING` | The ID of the instance field that was updated. |
+| `values` | `ARRAY` | Current values of the field after the operation. |
+| `status` | `STRING` | Returns "OK" if the operation was successful; or "ERROR" if something went wrong. |
+| `request_id` | `INTEGER` | ID of the workflow instance that was updated. |
+| `description` | `STRING` | Description of the operation result. |

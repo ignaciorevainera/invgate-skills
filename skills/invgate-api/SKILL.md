@@ -101,10 +101,12 @@ When looking up specific endpoints, inspect the corresponding reference file:
 
 | Domain | Reference File | Covered Operations |
 |---|---|---|
+| **API Endpoint Index** | `references/endpoint-index.md` | Full catalog of all 166 REST API endpoints from official manual |
+| **Requests In-Depth Guide** | `references/requests-guide.md` | Request lifecycle, `field_uid_<ID>`, process creation, `reassignment: true`, enums, BI/OLAP architecture |
 | **Incidents & Tickets** | `references/incidents.md` | `/incident`, `/incidents`, comments, approvals, solutions, custom fields, reassign, status transitions |
 | **Users & Orgs** | `references/users-organizations.md` | `/user`, `/users`, `/groups`, `/companies`, `/helpdesks`, `/locations`, `/levels` |
 | **Catalog & Custom Fields** | `references/catalog-custom-fields.md` | `/categories`, `/cf.fields.all`, `/cf.field.options.list`, `/cf.field.options.tree` |
-| **Workflows** | `references/workflows.md` | `/wf.request`, `/wf.deploy`, `/wf.initialfields.by.category` |
+| **Workflows** | `references/workflows.md` | `/wf.request`, `/wf.deploy`, `/wf.initialfields.by.category`, `/workflow.field.list.values` |
 | **Knowledge Base & System** | `references/knowledge-system.md` | `/kb.articles`, `/kb.categories`, `/breakingnews`, `/timetracking`, `/data.export`, `/sd.version` |
 | **Views & Reporting** | `skills/invgate-views` | `/incidents.details.by.view`, `/incidents.by.view`, `/incidents.last.hour`, anti-saturation patterns |
 
@@ -115,9 +117,11 @@ When looking up specific endpoints, inspect the corresponding reference file:
 | Issue | Cause | Solution |
 |---|---|---|
 | `401 Unauthorized` | Missing or invalid API token | Verify `Authorization: Bearer <token>` header and ensure user has API permissions in InvGate. |
-| `status: ERROR` on `/incident` | Missing required fields | Ensure `creator_id`, `customer_id`, `title`, `priority_id`, `type_id`, and `category_id` are provided. |
-| Custom fields not saving | Passing raw names instead of IDs | Query `/cf.fields.by.category` to obtain field IDs, then use `/incident.custom_field`. |
-| Submitting workflows | Calling `/incident` instead of `/wf.request` | Use `/wf.request` with the required initial fields from `/wf.initialfields.by.category`. |
+| `status: ERROR` on `/incident` | Missing required fields | Ensure `category_id`, `user_id`, and `title` are provided (`description` is mandatory for tickets, optional for processes). |
+| Custom fields not saving | Passing raw names instead of IDs | Query `/cf.fields.by.category` to obtain IDs. On ticket creation, inject directly via `field_uid_<ID>: <value>`. Otherwise use `/incident.custom_field`. |
+| Submitting workflows | Misunderstanding workflow creation | Workflows can be triggered via `POST /incident` with the workflow's `category_id` (passing initial variables as parameters) or inspected via `/wf.request`. |
+| Manual assignment conflicts | Hardcoding agents when rules exist | Set `"reassignment": true` on `PUT /incident` to let InvGate's routing rules automatically assign the request. |
+| Polling `/incidents` for BI | Heavy server load & rate limiting | Never poll `GET /incidents` in loops. Use the OLAP API, `POST /data.export`, or predefined views (`invgate-views`). |
 
 ## Live Verification
 
