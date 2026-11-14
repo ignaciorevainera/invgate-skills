@@ -6,7 +6,7 @@ This guide defines the official specification for generating visual representati
 
 ## 1. Node Types, Shapes, and Color Palette
 
-The diagram uses `flowchart TD` (or `flowchart LR` when horizontal layout is preferred) with high-contrast styling (light background, dark border, and dark text):
+The diagram uses **`flowchart LR`** (horizontal, left-to-right) by default so workflows read naturally across wide canvases and export cleanly to Excalidraw. Use `flowchart TD` only when explicitly requested. All nodes use high-contrast styling (light background, dark border, and dark text):
 
 | Tipo de Nodo | Tipo InvGate | Sintaxis Mermaid | Clase Mermaid | Color Fondo (fill) | Color Borde (stroke) | Color Texto (color) |
 |---|---|---|---|---|---|---|
@@ -29,7 +29,7 @@ The diagram uses `flowchart TD` (or `flowchart LR` when horizontal layout is pre
 Always declare these high-contrast `classDef` rules in your Mermaid flowchart:
 
 ```mermaid
-flowchart TD
+flowchart LR
     %% Declaración de clases de alto contraste (Fondo claro / Texto y borde oscuros)
     classDef startNode fill:#E8F8F0,stroke:#1E8449,stroke-width:2px,color:#145A32;
     classDef requestNode fill:#EBF5FB,stroke:#2471A3,stroke-width:2px,color:#1B4F72;
@@ -46,13 +46,19 @@ flowchart TD
 
 ---
 
-## 3. Formatting & Diagram Rules
+## 3. Formatting & Excalidraw-Safe Text Rules
 
-1. **Quote Node Labels**: Always wrap labels inside double quotes (e.g. `nodeId["Texto del paso"]`) to prevent syntax errors caused by parentheses, brackets, or accents.
-2. **Explicit Transitions**: Label branch outcomes clearly on connecting arrows:
+1. **Horizontal Priority (`flowchart LR`)**: Default to `flowchart LR` for all workflow diagrams unless vertical (`TD`) is explicitly requested.
+2. **Quote Node Labels**: Always wrap labels inside double quotes (e.g. `nodeId["Texto del paso"]`) to prevent syntax errors from parentheses, brackets, or accents.
+3. **No HTML or Markdown Inside Labels**: Never use `<br/>`, `<b>`, or `**bold**` inside node labels. Excalidraw's Mermaid importer and other external tools often render HTML/Markdown literally or miscalculate box widths.
+4. **Controlled Line Breaks (`\n`)**: Keep each line concise (~25–30 characters max) so renderers do not force illogical mid-word wraps. When two lines are needed, use an explicit `\n` inside double quotes (e.g. `"Aprobación: Gerente\nÁrea solicitante"`).
+5. **Support Group / Helpdesk Attribution**: When a task, approval, or action is performed by a specific support group, include the group name clearly:
+   - Short: `"Tarea: TI_Micro - Remasterización"`
+   - Long (2 lines with `\n` for Excalidraw): `"Tarea: TI_Micro_Microinformática\nRemasterización a Stock"` or `"Tarea: TI_Micro_Microinformática (Remasterización a Stock)"`
+6. **Explicit Transitions**: Label branch outcomes clearly on connecting arrows:
    - Conditional gateways: `-->|"Sí"|` and `-->|"No"|` (or matching rule names).
    - Approvals: `-->|"Aprobado"|`, `-->|"Rechazado"|`, and `-->|"Cancelado"|`.
-3. **Class Application**: Apply classes via `:::className` syntax on each node definition or via `class nodeId className;`.
+7. **Class Application**: Apply classes via `:::className` syntax on each node definition or via `class nodeId className;`.
 
 ---
 
@@ -61,7 +67,7 @@ flowchart TD
 Below is a complete workflow demonstrating all node types and their respective high-contrast styles:
 
 ```mermaid
-flowchart TD
+flowchart LR
     %% Declaración de clases de alto contraste (Fondo claro / Texto y borde oscuros)
     classDef startNode fill:#E8F8F0,stroke:#1E8449,stroke-width:2px,color:#145A32;
     classDef requestNode fill:#EBF5FB,stroke:#2471A3,stroke-width:2px,color:#1B4F72;
@@ -76,16 +82,16 @@ flowchart TD
     classDef endNode fill:#F2F4F4,stroke:#707B7C,stroke-width:2px,color:#34495E;
 
     %% Flujo del Workflow
-    Start(["Inicio: Solicitud de Equipamiento"]):::startNode
-    FormUserData["Formulario: Datos de Usuario y Puesto"]:::requestNode
-    CalcBudget["Fórmula: Calcular Costo Estimado"]:::formulaNode
+    Start(["Inicio: Alta de Equipo"]):::startNode
+    FormUserData["Formulario: Datos de\nUsuario y Puesto"]:::requestNode
+    CalcBudget["Fórmula: Calcular\nCosto Estimado"]:::formulaNode
     CondBudget{"¿Costo > $1000?"}:::conditionNode
-    ApprovalMgr["Aprobación: Gerente de Área"]:::approvalNode
-    ApiInventory["Web Service: Reservar en ERP"]:::webserviceNode
-    TaskIT["Tarea: Configuración de Equipo"]:::taskNode
-    SubProcAccess[["Subproceso: Creación de Cuentas"]:::subprocessNode
-    WaitDelivery["Espera: 48 Horas para Entrega"]:::waitNode
-    UpdateTicket["Acción InvGate: Notificar Entrega"]:::requestNode
+    ApprovalMgr["Aprobación: Gerente\nde Área"]:::approvalNode
+    ApiInventory["Web Service: Reservar\nen ERP"]:::webserviceNode
+    TaskIT["Tarea: TI_Micro_Microinformática\nRemasterización a Stock"]:::taskNode
+    SubProcAccess[["Subproceso: Creación\nde Cuentas"]]:::subprocessNode
+    WaitDelivery["Espera: 48 Horas\npara Entrega"]:::waitNode
+    UpdateTicket["Acción: Mesa de Ayuda\nNotificar Entrega"]:::requestNode
     EndSuccess(["Fin: Proceso Completado"]):::endNode
     CancelReq(["Cancelado: Solicitud Rechazada"]):::cancelNode
 

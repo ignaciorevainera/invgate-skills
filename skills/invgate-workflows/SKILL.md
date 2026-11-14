@@ -72,7 +72,7 @@ For the complete JSON schema and parameter mapping, consult [`references/sdw-sch
 
 ## Mermaid Workflow Diagramming
 
-When asked to visually represent, design, or document an InvGate workflow using Mermaid, always generate a `flowchart TD` block following the official color and shape standard:
+When asked to visually represent, design, or document an InvGate workflow using Mermaid, **prioritize horizontal layout (`flowchart LR`)** by default (use `flowchart TD` only if explicitly requested). Follow the official high-contrast color and shape standard:
 
 | Node Type | Color / HEX | Mermaid Syntax | Class |
 |---|---|---|---|
@@ -88,7 +88,11 @@ When asked to visually represent, design, or document an InvGate workflow using 
 | **Cancelación / Rechazo** | Rosa Claro (`#FDEDEC`, stroke `#C0392B`) | `([ "Cancelado: ..." ])` | `:::cancelNode` |
 | **Fin de solicitud** | Gris Perla (`#F2F4F4`, stroke `#707B7C`) | `([ "Fin: ..." ])` | `:::endNode` |
 
-Always include the corresponding `classDef` rules in the diagram. Wrap all step labels in double quotes (`"..."`) and explicitly label branch arrows (e.g. `-->|"Sí"|`, `-->|"Aprobado"|`).
+Always include the corresponding `classDef` rules in the diagram. For clean rendering in **Excalidraw** and external Mermaid tools:
+- Wrap all step labels in double quotes (`"..."`) and **never use HTML (`<br/>`) or Markdown (`**`)** inside labels.
+- Keep lines concise (~25–30 chars max); use explicit `\n` for two-line labels instead of relying on automatic wrapping.
+- When a step is owned by a specific support group/helpdesk, format as `"[Tipo]: [Grupo] - [Acción]"` or split with `\n` (`"Tarea: TI_Micro_Microinformática\nRemasterización a Stock"`).
+- Explicitly label branch arrows (e.g. `-->|"Sí"|`, `-->|"Aprobado"|`).
 
 For full class definitions and a complete multi-step example, consult [`references/mermaid-diagrams.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/mermaid-diagrams.md).
 
