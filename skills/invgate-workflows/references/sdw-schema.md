@@ -260,7 +260,9 @@ Types `10` and `14` are inferred from naming and usage; confirm in the target in
 
 ## Formula Functions (`303`, `action.type: 10`)
 
-Observed in `params.expression`: `CONCAT(...)`, `IF(cond, a, b)`, `IsEmpty(x)`, `DATE_SUBTRACT(date, n, "days")`, arithmetic (`{{var}}+1`), comparison (`==`, `>=`), logic (`||`). Variables use `{{variableId}}`. Result goes to `params.resultVariable`; `params.overwriteVariable` controls overwriting.
+Expressions are stored in `params.expression` using `{{variableId}}` interpolation, arithmetic, comparison (`==`, `>=`), and logic (`&&`, `||`). Result goes to `params.resultVariable`; `params.overwriteVariable` controls overwriting.
+
+For the full catalog of supported formula functions (Math, Text/Regex, Dates, Lists, and Logic), consult [`references/formula-functions.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/formula-functions.md).
 
 ---
 

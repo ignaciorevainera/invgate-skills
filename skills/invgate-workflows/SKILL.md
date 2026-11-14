@@ -66,7 +66,7 @@ For any connection between Node A and Node B:
 | `3` | `307` | **Subproceso** | Parallel child requests (`form.items`), optionally dynamic per variable. |
 | `3` | `310` | **Espera** | Timer or event pause (`waitingFor`). |
 
-For the complete JSON schema and parameter mapping, consult [`references/sdw-schema.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/sdw-schema.md).
+For the complete JSON schema and parameter mapping, consult [`references/sdw-schema.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/sdw-schema.md). For the full catalog of supported formula functions, consult [`references/formula-functions.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/formula-functions.md).
 
 ---
 
@@ -74,19 +74,19 @@ For the complete JSON schema and parameter mapping, consult [`references/sdw-sch
 
 When asked to visually represent, design, or document an InvGate workflow using Mermaid, always generate a `flowchart TD` block following the official color and shape standard:
 
-| Node Type | Color | Mermaid Syntax | Class |
+| Node Type | Color / HEX | Mermaid Syntax | Class |
 |---|---|---|---|
-| **Inicio (Start)** | Verde (`#2ecc71`) | `([ "Inicio: ..." ])` | `:::startNode` |
-| **Solicitudes / Formulario / Acciones** | Azul (`#3498db`) | `[ "Paso: ..." ]` | `:::requestNode` |
-| **Condicional / Bifurcación** | Amarillo (`#f1c40f`) | `{"¿Condición?"}` (Rombo) | `:::conditionNode` |
-| **Aprobaciones** | Cian (`#00bcd4`) | `[ "Aprobación: ..." ]` | `:::approvalNode` |
-| **Tareas** | Naranja (`#f39c12`) | `[ "Tarea: ..." ]` | `:::taskNode` |
-| **Subprocesos** | Naranja intenso (`#d35400`) | `[[ "Subproceso: ..." ]]` | `:::subprocessNode` |
-| **Fórmulas / Cálculos** | Verde lima (`#8bc34a`) | `[ "Fórmula: ..." ]` | `:::formulaNode` |
-| **Web Services / API** | Verde oscuro (`#1e824c`) | `[ "Web Service: ..." ]` | `:::webserviceNode` |
-| **Espera de tiempo** | Violeta (`#9b59b6`) | `[ "Espera: ..." ]` | `:::waitNode` |
-| **Cancelación / Rechazo** | Rojo (`#e74c3c`) | `([ "Cancelado: ..." ])` | `:::cancelNode` |
-| **Fin de solicitud** | Gris (`#95a5a6`) | `([ "Fin: ..." ])` | `:::endNode` |
+| **Inicio (Start)** | Verde Menta (`#E8F8F0`, stroke `#1E8449`) | `([ "Inicio: ..." ])` | `:::startNode` |
+| **Solicitud / Formulario / Acciones** | Celeste Claro (`#EBF5FB`, stroke `#2471A3`) | `[ "Paso: ..." ]` | `:::requestNode` |
+| **Condicional / Bifurcación** | Marfil Claro (`#FEFDE8`, stroke `#D4AC0D`) | `{"¿Condición?"}` (Rombo) | `:::conditionNode` |
+| **Aprobación** | Cian Claro (`#E0F7FA`, stroke `#0097A7`) | `[ "Aprobación: ..." ]` | `:::approvalNode` |
+| **Tarea** | Durazno Claro (`#FEF5E7`, stroke `#D35400`) | `[ "Tarea: ..." ]` | `:::taskNode` |
+| **Subproceso** | Terracota Claro (`#FBEEE6`, stroke `#BA4A00`) | `[[ "Subproceso: ..." ]]` | `:::subprocessNode` |
+| **Fórmula / Cálculo** | Lima Muy Claro (`#F4FBEA`, stroke `#689F38`) | `[ "Fórmula: ..." ]` | `:::formulaNode` |
+| **Web Service / API** | Esmeralda Claro (`#E8F6F3`, stroke `#16A085`) | `[ "Web Service: ..." ]` | `:::webserviceNode` |
+| **Espera de tiempo** | Lavanda Claro (`#F5EEF8`, stroke `#8E44AD`) | `[ "Espera: ..." ]` | `:::waitNode` |
+| **Cancelación / Rechazo** | Rosa Claro (`#FDEDEC`, stroke `#C0392B`) | `([ "Cancelado: ..." ])` | `:::cancelNode` |
+| **Fin de solicitud** | Gris Perla (`#F2F4F4`, stroke `#707B7C`) | `([ "Fin: ..." ])` | `:::endNode` |
 
 Always include the corresponding `classDef` rules in the diagram. Wrap all step labels in double quotes (`"..."`) and explicitly label branch arrows (e.g. `-->|"Sí"|`, `-->|"Aprobado"|`).
 
