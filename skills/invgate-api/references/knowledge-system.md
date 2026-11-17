@@ -274,11 +274,11 @@ Modifies an article given a certain ID.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `is_private` | `BOOLEAN` | No | Mark as private. 1: Is private. 0: Is public. |
+| `is_private` | `BOOLEAN` | No | Mark as private. 1: Is private. 0: Is public. With KB article versioning enabled, if null, left unchanged. |
 | `external_id` | `STRING` | No | External ID of the article. Optional; must be unique among articles. Send an empty string to clear it. If null, it is left unchanged. |
-| `status` | `INTEGER` | No | Article status ID. 1: Published, 4: Draft, 5: Archived. If null, the status is left unchanged. |
+| `status` | `INTEGER` | No | Article status ID. 1: Published, 4: Draft, 5: Archived. Without KB versioning: if null, left unchanged. With KB versioning: without `status`, a published article publishes the new version and a draft/archived saves a draft; `4` saves content as draft without unpublishing current version; `1` publishes it (or sends to approval if category requires it). **Returns HTTP `409` if another user has the article open in the editor.** |
 | `content` | `STRING` | No | Article content. |
-| `responsible_id` | `INTEGER` | No | Article responsible. If it's null, the assigned responsible user will be the same as the author. |
+| `responsible_id` | `INTEGER` | No | Article responsible. If null (without KB versioning), assigned responsible user will be the same as the author. With KB article versioning enabled, if null, left unchanged. |
 | `description` | `STRING` | No | Article description. |
 | `title` | `STRING` | No | Article title. |
 | `author_id` | `INTEGER` | Yes | Author ID. |
@@ -290,6 +290,9 @@ Modifies an article given a certain ID.
 | Field | Type | Description |
 |---|---|---|
 | `status` | `STRING` | Returns 'OK' if the article was correctly modified; or 'ERROR' if something went wrong. |
+| `version_id` | `INTEGER` | ID of the newest version of the article after the change (draft in progress if there is one, otherwise current version). `null` when KB article versioning is disabled. |
+| `version` | `STRING` | Version number (e.g. `"2.0"` or `"1.1"`). `null` when KB article versioning is disabled. |
+| `version_status` | `STRING` | Version status: `"published"`, `"draft"`, `"pending_approval"`, `"rejected"`, or `"approved"`. `null` when KB article versioning is disabled. |
 
 ---
 
@@ -303,7 +306,7 @@ Creates an article.
 |---|---|---|---|
 | `is_private` | `BOOLEAN` | No | Mark as private. 1: Is private. 0: Is public. |
 | `attachments` | `ARRAY` | No | Array of attachments. |
-| `status` | `INTEGER` | No | Article status ID. 1: Published, 4: Draft. If null, the article is created as published. |
+| `status` | `INTEGER` | No | Article status ID. 1: Published, 4: Draft. If null, the article is created as published. With KB article versioning enabled, publishing in a category whose approvers must approve the author's versions creates the article as a draft and sends its version to approval. |
 | `content` | `STRING` | Yes | Article content. |
 | `responsible_id` | `INTEGER` | No | Article responsible. If it's null, the assigned responsible user will be the same as the author. |
 | `description` | `STRING` | No | Article description. |
@@ -318,6 +321,9 @@ Creates an article.
 |---|---|---|
 | `article_id` | `INTEGER` | Article ID. |
 | `status` | `STRING` | Returns 'OK' if the article was correctly created; or 'ERROR' if something went wrong. |
+| `version_id` | `INTEGER` | ID of the newest version of the article after creation. `null` when KB article versioning is disabled. |
+| `version` | `STRING` | Version number (e.g. `"1.0"`). `null` when KB article versioning is disabled. |
+| `version_status` | `STRING` | Version status: `"published"`, `"draft"`, `"pending_approval"`, `"rejected"`, or `"approved"`. `null` when KB article versioning is disabled. |
 
 ---
 
@@ -370,12 +376,16 @@ Deletes an attachment from an article.
 |---|---|---|---|
 | `attachment_id` | `INTEGER` | Yes | Attachment ID. |
 | `article_id` | `INTEGER` | Yes | Article ID. |
+| `author_id` | `INTEGER` | No | ID of the user in whose name the attachment is removed. With KB article versioning enabled, removing an attachment creates a new version like any content change; if `null`, System user is used. |
 
 **Response Fields:**
 
 | Field | Type | Description |
 |---|---|---|
 | `status` | `STRING` | Returns 'OK' if the attachment was correctly deleted; or 'ERROR' if something went wrong. |
+| `version_id` | `INTEGER` | ID of the newest version of the article after the change. `null` when KB article versioning is disabled. |
+| `version` | `STRING` | Version number. `null` when KB article versioning is disabled. |
+| `version_status` | `STRING` | Version status: `"published"`, `"draft"`, `"pending_approval"`, `"rejected"`, or `"approved"`. `null` when KB article versioning is disabled. |
 
 ---
 
@@ -396,6 +406,9 @@ Adds attachments to an article.
 | Field | Type | Description |
 |---|---|---|
 | `status` | `STRING` | Returns 'OK' if the attachment was correctly added; or 'ERROR' if something went wrong. |
+| `version_id` | `INTEGER` | ID of the newest version of the article after the change. `null` when KB article versioning is disabled. |
+| `version` | `STRING` | Version number. `null` when KB article versioning is disabled. |
+| `version_status` | `STRING` | Version status: `"published"`, `"draft"`, `"pending_approval"`, `"rejected"`, or `"approved"`. `null` when KB article versioning is disabled. |
 
 ---
 

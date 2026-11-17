@@ -895,13 +895,13 @@ Updates the info of a user.
 | `address` | `STRING` | No | User home address. |
 | `name` | `STRING` | No | User name. |
 | `doc` | `STRING` | No | User national ID number. |
-| `other` | `STRING` | No | User secondary email address. |
+| `other-email` | `STRING` | No | User secondary email address. |
 | `manager_id` | `INTEGER` | No | User's manager ID. |
 | `email` | `STRING` | No | User email address. |
 | `localization` | `STRING` | No | Localization of the user. |
 | `lastname` | `STRING` | No | User lastname. |
 | `id` | `INTEGER` | Yes | User ID. |
-| `language` | `STRING` | No | User language. es: Español, en: English (US), en_GB: English (UK), pt: Português, fr: Français, de: Deutsch, ca: Català, it: Italiano, nl: Nederlands, el: Ελληνικά. |
+| `language` | `STRING` | No | User language. es: Español, en: English (US), en_GB: English (UK), pt: Português (Brasil), pt_PT: Português (Portugal), fr: Français, de: Deutsch, ca: Català, it: Italiano, nl: Nederlands, el: Ελληνικά. |
 
 **Response Fields:**
 
@@ -931,11 +931,11 @@ Creates a new user.
 | `force_password_change` | `BOOLEAN` | No | If true, the user will be forced to change their password on the next login. |
 | `fax` | `STRING` | No | User fax number. |
 | `phone` | `STRING` | No | User phone number. |
-| `other` | `STRING` | No | User secondary email address. |
+| `other-email` | `STRING` | No | User secondary email address. |
 | `address` | `STRING` | No | User home address. |
 | `name` | `STRING` | Yes | User name. |
 | `pass` | `STRING` | No | User password. |
-| `is_external` | `BOOLEAN` | No | An external user can't login to the system and can only interact with it via email. |
+| `is_external` | `BOOLEAN` | No | An external user can't login to the system and can only interact with it via email. External users created via API have validated emails by default so workflow/notification emails are not dropped. |
 | `doc` | `STRING` | No | User national ID number. |
 | `office` | `STRING` | No | User office phone number. |
 | `manager_id` | `INTEGER` | No | User's manager ID. |

@@ -98,6 +98,11 @@ For full class definitions and a complete multi-step example, consult [`referenc
 
 ## Practices Observed in Real Workflows
 
+* **Prefer Native Actions & Formulas (Workflow Assistant)**: Prioritize built-in Formula functions over external Parser calls, and native InvGate/Connector actions over self-API HTTP calls (`type: 9`).
+* **Native IGAM & Product Catalog**: Use *Create CI* (auto-links CI to request), *Update CI Custom Fields* (Assets, Business Apps, Cloud Assets, Databases), and *Product Catalog* selection + fulfillment stages natively.
+* **Native Third-Party Connectors**: Use built-in actions for Active Directory (via InvGate Connector), NinjaOne (inventory/alerts/scripts), and Dayforce.
+* **Form & Condition Capabilities**: User-type fields support default users; File fields support single vs. multiple upload toggles; conditional steps support multiple locations in a single condition.
+
 * Store IDs returned by child-request, announcement, or API steps in a variable (`variable_store`, `receive.vars`) before later steps need them.
 * Use `failAction: "continue"` / `failaction: "continue"` on non-critical automations so a failure does not block the process.
 * Branch approvals on all three outcomes; route `next_cancelled` explicitly, usually with `next_rejected`.

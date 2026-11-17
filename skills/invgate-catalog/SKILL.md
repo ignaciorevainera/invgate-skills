@@ -36,6 +36,9 @@ Attributes of a creatable category (verify live, see Discovery):
 - Use a workflow category only when approvals, routing, or automation are needed. Otherwise use a plain category with a template.
 - Mark a custom field `required` only when the process cannot start without it.
 - Pair each catalog item with a template (`invgate-templates`) and, if `has_workflow`, a workflow (`invgate-workflows`).
+- Bulk-manage **List** and **Tree** custom field options via CSV/XLSX import and export.
+- Category import/export includes the `Default Type` column.
+- Requests can link IGAM financial/contractual entities (contracts, vendors, cost centers, purchase orders).
 
 ## Discovery
 

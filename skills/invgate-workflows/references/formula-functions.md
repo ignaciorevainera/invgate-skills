@@ -35,6 +35,8 @@ This reference documents the functions available in InvGate Service Management w
 | `REGEXEXTRACT` | Extrae la primera subcadena del texto que coincide con una expresión regular. |
 | `REGEXEXTRACT_ALL` | Extrae todas las coincidencias de una expresión regular en el texto y las devuelve como una lista. |
 | `SUBSTITUTE` | Reemplaza todas las ocurrencias de un texto por otro. |
+| `LOWER` | Convierte un texto a minúsculas. |
+| `UPPER` | Convierte un texto a mayúsculas. |
 
 ---
 

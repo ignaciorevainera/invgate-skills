@@ -49,7 +49,8 @@ Extract `view_id: 76`.
 | Only IDs for light sync | `GET /incidents.by.view` | Up to 500 / page | Returns `requestIds[]`; uses `limit` & `offset` |
 | Live tool call via MCP | `list_view_requests` | Up to 100 / page | Set `predefined: false` for user views |
 | Delta sync of recent activity | `GET /incidents.last.hour` | Up to 500 / page | Incremental polling without re-reading history |
-| Massive full dataset export | `POST /data.export` | Unlimited | Asynchronous CSV/XLS generation |
+| Massive full dataset export | `POST /data.export` | Unlimited | Asynchronous CSV/XLS generation; also supports *Interval Report* and *Virtual Service Agent conversations* sources |
+| UI View Export & Sorting | Web UI | - | Views support native **JSON** export (besides CSV/XML) and sorting by `Date` / `Date & Time` custom & workflow fields |
 
 ---
 
