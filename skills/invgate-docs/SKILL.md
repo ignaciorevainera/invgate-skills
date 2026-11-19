@@ -19,6 +19,30 @@ InvGate solutions are not one-size-fits-all:
 
 ---
 
+## Publishing to the InvGate Knowledge Base
+
+When the deliverable lives inside InvGate (`Artículos`), respect the native lifecycle:
+
+| State | Visible to readers | Used by AI Hub / Virtual Agent |
+|---|---|---|
+| Borrador | No | No |
+| Publicado | According to its visibility rule | Yes |
+| Archivado | No | No |
+| Eliminado | No | No |
+
+- Properties (category, visibility, comments, owner, external ID) are edited separately from content. Content changes create versions `X.n`; publishing turns a draft into the next whole version (1.1, 1.2 → 2.0).
+- A version is `En borrador`, `Pendiente de aprobación`, `Rechazada` or `Publicada`. Only the latest draft can be pending. A rejected version keeps the rejection reason and is never published.
+- Approvers are configured per KB permission (`Config > Artículos > General`), for all agents or for specific helpdesks, groups or companies. Being an approver grants read access, not write access. Recurring review dates are configured per category. Both features are off by default.
+- Drafts are visible only to administrators, editors and approvers of that category. AI Hub, the Virtual Service Agent and solution recommendations use **published versions only**.
+- Visibility: **Acceso privado** (agents and above), **Usuarios registrados** (all signed-in users), **Acceso público** (anyone with the generated link). Per-article settings override the global KB configuration.
+- Categories can be bound to the whole catalog or to selected catalog categories, and up to three articles can be featured per catalog category.
+- Import supports `.md`, `.docx`, `.pdf`, `.txt`, `.html` and CSV containing HTML. Imported articles land as drafts.
+- External sources (SharePoint, Google Drive) are federated read-only for the Virtual Agent; they are not copied into the KB.
+
+For Notion/Confluence output, follow the archetypes below. For InvGate-native articles, follow the same structure but keep to the editor's supported formatting.
+
+---
+
 ## Language & Style Guidelines
 
 ### 1. Plain & Concise Technical Style
@@ -206,3 +230,7 @@ Optar por **[Solución elegida, ej. Plantilla HTML con campos fijos]** en lugar 
 1. **Fase 1 (Inmediata)**: Desplegar plantilla HTML con títulos `#3498db` y notas explicativas.
 2. **Fase 2 (Mediano Plazo)**: Configurar automatización de cierre en estado `Resuelto`.
 ```
+
+## Official Documentation
+
+[`references/official-kb.md`](references/official-kb.md) — KB configuration, article states and versioning, import formats and external knowledge sources.

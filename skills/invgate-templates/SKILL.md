@@ -9,6 +9,19 @@ description: >-
 This skill provides instructions for generating HTML forms and templates tailored for the InvGate ticketing system.
 When the user requests a new template or form fields for InvGate, strictly follow these design and structure rules.
 
+## Where a Template Lives
+
+Templates are configured at **Config > Solicitudes > Personalizaciones** and applied per category at request creation.
+
+| Property | Behavior |
+|---|---|
+| Nombre / Categorías | A template applies to one or more catalog categories |
+| Idioma | One template holds several languages; the user sees it in their instance language |
+| Asunto | Title shown to the user when creating the request |
+| Contenido | Rich content with native fields: text, textarea, select, checkbox, table |
+
+Native fields are configurable: width, max characters, email/URL formatting, default value, multi-select and mandatory. They produce the same HTML controls listed below; keep `name` and `required` aligned with the custom fields so captured values are reportable.
+
 ## Design Rules
 
 1. **HTML Structure (`<p>`)**: InvGate's editor requires fields and text to be wrapped in paragraph `<p>` tags. Do not use `<div>` or `<label>` wrappers. Every distinct line, title, or field must be enclosed in its own `<p>` or alongside its text inside a `<p>`.
@@ -58,3 +71,7 @@ When the user requests a new template or form fields for InvGate, strictly follo
 ## Field Discovery
 
 When an InvGate MCP server is available, use `invgate-mcp` (`get_category_creation_form`) to see which custom fields and option values a category already defines before designing a template. Never reuse option values or IDs from a different instance.
+
+## Official Documentation
+
+[`references/official-kb.md`](references/official-kb.md) — template configuration, category binding and multilingual behavior.

@@ -16,15 +16,41 @@ https://[instance].cloud.invgate.net/api/v1
 ```
 *(On-premises installations use `https://[your-domain]/api/v1`)*
 
+### Rate Limits
+
+The general API (`/api/v1/`) allows **1,000 requests per minute per instance**. On excess it returns HTTP `429` with a `Retry-After` value. Some endpoints (request create/update/read) have stricter plan-based limits, so batch reads instead of looping.
+
+`GET /api/v1/` returns a JSON list of every available method with its parameters. Use it to confirm an endpoint name before coding.
+
 ### Authentication Methods
 
-1. **Bearer API Token (Recommended)**
-   Pass the API token in the `Authorization` header:
+1. **OAuth 2.0 Client Credentials (Recommended)**
+
+   Create credentials in `Config > Integraciones > API > Agregar`. Select the API resources and methods the integration needs; the credential is limited to them.
+
+   ```text
+   POST <access token URL from the credential>
+   grant_type=client_credentials
+   client_id=<client id>
+   client_secret=<client secret>
+   scopes=api.v1.incident:post api.v1.incident:get
+   ```
+
+   Scope format is `api.v1.<endpoint>:<method>`. Request one scope per endpoint and method; a missing scope is an authorization error, not a bad payload.
+
+2. **Basic Authentication (Fallback)**
+
+   Credentials also accept username and password. Use it only when the client cannot perform the OAuth exchange.
+
+3. **Bearer API Token**
+
+   Pass the obtained token in the `Authorization` header:
    ```http
    Authorization: Bearer <API_TOKEN>
    ```
 
-2. **Session Token via `/user.token`**
+4. **Session Token via `/user.token`**
+
    If authenticating programmatically on behalf of a user ID:
    ```bash
    POST /api/v1/user.token
@@ -93,6 +119,18 @@ curl -X PUT "https://[instance].cloud.invgate.net/api/v1/incident.reassign" \
   }'
 ```
 
+### 4. Batch Read (`GET /incidents`)
+
+Read many requests in one call instead of looping over `/incident`:
+
+```bash
+GET /api/v1/incidents?ids[]=1042&ids[]=1043&ids[]=1044
+```
+
+Accepts up to **200 IDs per call** and returns the same structure as `/incident`. For views and large datasets use `invgate-views`.
+
+`/incident` does **not** include task data. Read tasks with `/incident.tasks` separately.
+
 ---
 
 ## Domain Reference Index
@@ -121,7 +159,13 @@ When looking up specific endpoints, inspect the corresponding reference file:
 | Custom fields not saving | Passing raw names instead of IDs | Query `/cf.fields.by.category` to obtain IDs. On ticket creation, inject directly via `field_uid_<ID>: <value>`. Otherwise use `/incident.custom_field`. |
 | Submitting workflows | Misunderstanding workflow creation | Workflows can be triggered via `POST /incident` with the workflow's `category_id` (passing initial variables as parameters) or inspected via `/wf.request`. |
 | Manual assignment conflicts | Hardcoding agents when rules exist | Set `"reassignment": true` on `PUT /incident` to let InvGate's routing rules automatically assign the request. |
-| Polling `/incidents` for BI | Heavy server load & rate limiting | Never poll `GET /incidents` in loops. Use the OLAP API, `POST /data.export`, or predefined views (`invgate-views`). |
+| Polling `/incidents` for BI | Heavy server load & rate limiting | Never poll `GET /incidents` in loops. Use a view (`invgate-views`) or a data export report (`POST /data.export`). The OLAP API is **deprecated from v8.22**. |
+| OAuth call rejected | Scope missing or wrong method | Request every `api.v1.<endpoint>:<method>` the integration uses; one scope per method. |
+| Reading tasks returns nothing | `/incident` does not include tasks | Call `/incident.tasks` for the request. |
+
+## Official Documentation
+
+Curated KB links, by task: [`references/official-kb.md`](references/official-kb.md). Start with article 1045 (credentials and limits) and 1648 (scopes).
 
 ## Live Verification
 

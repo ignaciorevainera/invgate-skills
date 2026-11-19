@@ -66,7 +66,7 @@ For any connection between Node A and Node B:
 | `3` | `307` | **Subproceso** | Parallel child requests (`form.items`), optionally dynamic per variable. |
 | `3` | `310` | **Espera** | Timer or event pause (`waitingFor`). |
 
-For the complete JSON schema and parameter mapping, consult [`references/sdw-schema.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/sdw-schema.md). For the full catalog of supported formula functions, consult [`references/formula-functions.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/formula-functions.md).
+For the complete JSON schema and parameter mapping, consult [`references/sdw-schema.md`](references/sdw-schema.md). For the full catalog of supported formula functions, consult [`references/formula-functions.md`](references/formula-functions.md).
 
 ---
 
@@ -94,7 +94,40 @@ Always include the corresponding `classDef` rules in the diagram. For clean rend
 - When a step is owned by a specific support group/helpdesk, format as `"[Tipo]: [Grupo] - [Acción]"` or split with `\n` (`"Tarea: TI_Micro_Microinformática\nRemasterización a Stock"`).
 - Explicitly label branch arrows (e.g. `-->|"Sí"|`, `-->|"Aprobado"|`).
 
-For full class definitions and a complete multi-step example, consult [`references/mermaid-diagrams.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/mermaid-diagrams.md).
+For full class definitions and a complete multi-step example, consult [`references/mermaid-diagrams.md`](references/mermaid-diagrams.md).
+
+## Process Lifecycle in the Instance
+
+A process is not live because it exists. It must be **published** and **assigned to at least one catalog category**.
+
+```text
+Draft → (errors?) → Publicar → Asignar categoría → Activo
+```
+
+| State | Meaning |
+|---|---|
+| Publicación pendiente | Changes exist that are not published; requests keep running the published version |
+| Revisión pendiente | Configuration errors block publication |
+| Sin categoría | Published but inactive; nothing triggers it |
+| Activo | Published, error-free and assigned |
+
+- Publish from the process list after every change. Editing the draft does not affect running requests.
+- **Historial de versiones** lists published versions only: export as `.sdw` or restore as the active draft. Export is limited to versions published in the last 6 months. Take an `.sdw` backup before a large refactor.
+- Through the API: `PUT /wf.deploy` with `workflow_id` (the `associated_workflow_id` returned by `wf.initialfields.by.category`). Scope: `api.v1.wf.deploy:put`.
+
+## Stage Configuration Notes
+
+- **Web Service**: methods POST/GET/PUT/PATCH/DELETE; auth None, Basic, custom header, OAuth 2.0 client credentials or authorization code. Body format URL, JSON or API JSON. Headers accept constants and variables. Response variables use JSONPath: `$.user.name`, `$.items[0].id`, `$.items[*].name` (only one level after `[*]`).
+- **Reusable blocks**: a saved sequence of stages, inserted as one stage. Published blocks are immutable until republished; cannot contain another block; exposed variables are mapped by reference, so a value changed inside the block is visible afterwards. Create one from existing stages (the process does not need republishing) or from scratch at `Config > Solicitudes > Procesos > Bloques reutilizables`. A selection cannot become a block if it has errors, contains a block, is not consecutive, or has a branch pointing outside it.
+- **Connectors**: prebuilt stages for Entra ID, Okta, Google Workspace, Microsoft Graph, Active Directory, Google/Outlook Calendar, Zoom, Google Meet, SharePoint, Confluence, Notion, DocuSign, PandaDoc, PagerDuty, Tenable, HubSpot, Asana, ClickUp, Jira, Dell, Greenhouse, Workday, ADP, Rippling, Dayforce, JotForm, Azure DevOps, ClassLink and NinjaOne. They require credentials before use; credentials are reusable across stages and processes.
+- **Test call**: a connector or Web Service stage can run a real call from its panel before publishing. It shows HTTP status, the sent request, the raw response and the mapped variables, and exports an execution log. The call hits the external system for real.
+- **Dynamic subprocesses**: convert a subprocess to dynamic and choose a list or user field as iterator. The special variable `Elementos del listado` becomes the current item. One child request per option/user.
+- **Dynamic form fields**: visibility rules per field, configured in the start or form stage. Not supported when the request is created from Teams, Slack or the Virtual Agent.
+- **Tasks**: assign to a user or helpdesk, set dependencies and due dates; optional tasks do not block the stage. Planning mode keeps tasks editable without completion.
+
+## Official Documentation
+
+[`references/official-kb.md`](references/official-kb.md) — 23 curated articles on the process module, publication, versions, stages, Web Services, formulas and reusable blocks.
 
 ## Practices Observed in Real Workflows
 

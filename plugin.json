@@ -1,14 +1,16 @@
 {
   "name": "invgate-skills",
-  "description": "A collection of AI agent skills for InvGate Service Management: templates, workflows, and service catalog design.",
-  "version": "0.1.0",
+  "description": "A collection of AI agent skills for InvGate Service Management and Asset Management: fundamentals, templates, workflows, catalog, API, and reporting.",
+  "version": "0.2.0",
   "skills": [
+    "skills/invgate-basics",
     "skills/invgate-templates",
     "skills/invgate-workflows",
     "skills/invgate-catalog",
     "skills/invgate-api",
     "skills/invgate-mcp",
     "skills/invgate-docs",
-    "skills/invgate-views"
+    "skills/invgate-views",
+    "skills/invgate-asset"
   ]
 }

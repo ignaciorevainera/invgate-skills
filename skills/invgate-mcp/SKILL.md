@@ -19,6 +19,8 @@ Live, read-mostly access to an InvGate instance. Use it to **discover real struc
 | MCP and REST API disagree | REST API wins. Report the discrepancy. |
 | Target instance unclear | Ask which instance before using concrete values. |
 
+**Which server am I on?** InvGate ships an official MCP server per instance, in Beta. Its tokens start with `smmcp_` (Service Management) or `ammcp_` (Asset Management) and connect over Streamable HTTP at `/mcp/v1`. See [`references/official-mcp-server.md`](references/official-mcp-server.md) for activation, toggles, token rules and the official tool inventory. The tool names used below belong to the instance MCP toolset; if the connected server exposes different names, map by capability, not by name.
+
 ## What Transfers Between Instances
 
 - **Transfers:** entity attributes, field types, `required` flags, enum meaning, form shape (`custom_fields`, `template`), pagination, response shapes.
@@ -48,3 +50,5 @@ Tool inputs and field maps: [references/mcp-tools.md](references/mcp-tools.md).
 | Guessing option values for a field | Read `options` from `get_category_creation_form`. |
 | Concluding an entity is missing from one empty result | Check permissions and filters first. |
 | Skipping verification because MCP is absent | Fall back to `invgate-api` references and say so. |
+| Assuming MCP can advance a process stage | Creation is supported; stage forms still require the web UI. |
+| Assuming write access | The administrator enables writing per role; a read-only token fails on any create, reply or approval. |

@@ -262,7 +262,7 @@ Types `10` and `14` are inferred from naming and usage; confirm in the target in
 
 Expressions are stored in `params.expression` using `{{variableId}}` interpolation, arithmetic, comparison (`==`, `>=`), and logic (`&&`, `||`). Result goes to `params.resultVariable`; `params.overwriteVariable` controls overwriting.
 
-For the full catalog of supported formula functions (Math, Text/Regex, Dates, Lists, and Logic), consult [`references/formula-functions.md`](file:///e:/Dev/proyectos/invgate-skills/skills/invgate-workflows/references/formula-functions.md).
+For the full catalog of supported formula functions (Math, Text/Regex, Dates, Lists, and Logic), consult [`formula-functions.md`](formula-functions.md).
 
 ---
 
