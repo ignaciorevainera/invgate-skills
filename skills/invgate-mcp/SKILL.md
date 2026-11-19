@@ -52,3 +52,16 @@ Tool inputs and field maps: [references/mcp-tools.md](references/mcp-tools.md).
 | Skipping verification because MCP is absent | Fall back to `invgate-api` references and say so. |
 | Assuming MCP can advance a process stage | Creation is supported; stage forms still require the web UI. |
 | Assuming write access | The administrator enables writing per role; a read-only token fails on any create, reply or approval. |
+
+## Citing the Source
+
+When the answer depends on a topic with a **dedicated** KB article, close the response with:
+
+Más información:
+- [Título del artículo](https://support.invgate.com/knowledgebase_articles/show/index/article_id/1550) — KB #1550
+
+- Up to **3** citations, one per distinct topic covered in the answer.
+- Only dedicated articles. No article, no citation; never infer an ID.
+- Prefer links from `references/official-kb.md`, then `kb-index.md`.
+- Omit when the answer comes from live instance data or is a design recommendation.
+- Use the label in the user's language (`Más información` / `Further reading`).

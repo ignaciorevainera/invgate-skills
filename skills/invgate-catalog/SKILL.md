@@ -68,3 +68,16 @@ Without MCP, use the REST API: `GET /categories`, `GET /cf.fields.by.category`, 
 ## Official Documentation
 
 [`references/official-kb.md`](references/official-kb.md) — 16 curated KB articles covering catalog configuration, CSV import, visibility rules, request types and custom fields.
+
+## Citing the Source
+
+When the answer depends on a topic with a **dedicated** KB article, close the response with:
+
+Más información:
+- [Título del artículo](https://support.invgate.com/knowledgebase_articles/show/index/article_id/1550) — KB #1550
+
+- Up to **3** citations, one per distinct topic covered in the answer.
+- Only dedicated articles. No article, no citation; never infer an ID.
+- Prefer links from `references/official-kb.md`, then `kb-index.md`.
+- Omit when the answer comes from live instance data or is a design recommendation.
+- Use the label in the user's language (`Más información` / `Further reading`).

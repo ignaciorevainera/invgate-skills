@@ -160,3 +160,16 @@ Activo / CI ── tipo de activo, campos personalizados, etiquetas, ubicación,
 - Verify names, IDs and options against the target instance. Nothing from this skill is instance data.
 - Quote the official article link when a statement comes from the KB; it changes between versions.
 - State the product and version when behavior differs (Cloud vs On-Premise, LTS line).
+
+## Citing the Source
+
+When the answer depends on a topic with a **dedicated** KB article, close the response with:
+
+Más información:
+- [Título del artículo](https://support.invgate.com/knowledgebase_articles/show/index/article_id/1550) — KB #1550
+
+- Up to **3** citations, one per distinct topic covered in the answer.
+- Only dedicated articles. No article, no citation; never infer an ID.
+- Prefer links from `references/official-kb.md`, then `kb-index.md`.
+- Omit when the answer comes from live instance data or is a design recommendation.
+- Use the label in the user's language (`Más información` / `Further reading`).

@@ -90,3 +90,16 @@ Before querying via API, optimize the View configuration in the InvGate web cons
 4. **Keep the view under 1,000 rows if agents sort by date**: above that limit InvGate disables sorting by date and date-time columns.
 
 For full JSON response schemas, curl examples, and export workflows, consult [`references/reporting-endpoints.md`](references/reporting-endpoints.md). Official articles, including the OLAP migration: [`references/official-kb.md`](references/official-kb.md).
+
+## Citing the Source
+
+When the answer depends on a topic with a **dedicated** KB article, close the response with:
+
+Más información:
+- [Título del artículo](https://support.invgate.com/knowledgebase_articles/show/index/article_id/1550) — KB #1550
+
+- Up to **3** citations, one per distinct topic covered in the answer.
+- Only dedicated articles. No article, no citation; never infer an ID.
+- Prefer links from `references/official-kb.md`, then `kb-index.md`.
+- Omit when the answer comes from live instance data or is a design recommendation.
+- Use the label in the user's language (`Más información` / `Further reading`).
